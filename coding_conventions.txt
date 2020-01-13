@@ -1,0 +1,42 @@
+-- Take a look at this and let me know how it is.
+-- Change/add things that I've forgotten/still need to add
+
+-- Verilog --
+Use underscores
+
+Prefixes:
+i_    Input signal
+o_    Output signal
+r_    Register signal
+w_    Wire signal
+C_    Constant (Constants should be all-caps)
+t_    User-Defined Type
+s_    State Machine
+
+Net/Variable Order in Module:
+parameter/localparam
+integer
+reg
+wire
+assign
+
+Indent:
+2 Spaces
+
+-- VHDL --
+Use Camelcase
+
+Suffixes:
+In    Input signal
+Out   Output signal
+R     Register signal (std_logic, std_logic_vector)
+don't remember    Constant
+FSMR  State Machine
+
+Net/Variable Order in Entity:
+constants
+std_logic/std_logic_vectors
+alias
+
+Indent:
+2 Spaces
