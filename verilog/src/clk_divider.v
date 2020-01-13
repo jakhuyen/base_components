@@ -20,7 +20,6 @@ module clk_divider #(parameter DIV_NUM = 4) (
 
   always @ (posedge i_rst, posedge i_clk) begin
     if (i_rst == 1) begin
-      r_cnt_done <= 0;
       r_clk      <= 0;
     end
 
