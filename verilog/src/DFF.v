@@ -21,5 +21,6 @@ module DFF (
         o_q     <= i_d;
         o_q_not <= ~i_d;
       end
+    end
   end
 endmodule
