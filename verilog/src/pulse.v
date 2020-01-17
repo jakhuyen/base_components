@@ -2,7 +2,8 @@ module pulse (
   input i_clk,
   input i_rst,
   input i_sig,
-  output o_pulse);
+  output o_pulse
+);
 
   reg r_pulse;
 
@@ -16,7 +17,7 @@ module pulse (
     else if (i_clk == 1) begin
       r_pulse <= 0;
 
-      if (posedge i_sig) begin
+      @ (posedge i_sig) begin
         r_pulse <= 1;
       end
     end
