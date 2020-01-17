@@ -2,20 +2,22 @@
 -- Change/add things that I've forgotten/still need to add
 
 -- Verilog --
-Use underscores
+Use Camelcase
 
 Prefixes:
-i_    Input signal
-o_    Output signal
-r_    Register signal
-w_    Wire signal
-C_    Constant (Constants should be all-caps)
-t_    User-Defined Type
-s_    State Machine
+In     Input signal
+Out    Output signal
+R      Register signal
+W      Wire signal
+Constant (Constants should be all-caps and use underscores)
+T      User-Defined Type
+FSMR   State Machine
 
 Net/Variable Order in Module:
-parameter/localparam
-integer
+define statements
+module parameters/localparam
+module port
+integer/realtime
 reg
 wire
 assign
