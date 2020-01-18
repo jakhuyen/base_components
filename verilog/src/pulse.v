@@ -1,24 +1,24 @@
 module pulse (
-  input i_clk,
-  input i_rst,
-  input i_sig,
-  output o_pulse
+  input clkIn,
+  input rstIn,
+  input sigIn,
+  output pulseOut
 );
 
-  reg r_pulse;
+  reg pulseR;
 
-  assign o_pulse = r_pulse;
+  assign pulseOut = pulseR;
 
-  always @ (posedge i_rst, posedge i_clk) begin
-    if (i_rst == 1) begin
-      r_pulse <= 0;
+  always @ (posedge rstIn, posedge clkIn) begin
+    if (rstIn == 1) begin
+      pulseR <= 0;
     end
 
-    else if (i_clk == 1) begin
-      r_pulse <= 0;
+    else if (clkIn == 1) begin
+      pulseR <= 0;
 
-      @ (posedge i_sig) begin
-        r_pulse <= 1;
+      @ (posedge sigIn) begin
+        pulseR <= 1;
       end
     end
   end
