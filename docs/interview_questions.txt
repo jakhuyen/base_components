@@ -1,0 +1,3 @@
+Interview Questions:
+1. Active High vs. Active Low Reset
+2. Asynchronous vs. Synchronous Reset
