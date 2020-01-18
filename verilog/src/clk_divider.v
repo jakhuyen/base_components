@@ -14,7 +14,7 @@ module clk_divider #(parameter DIV_NUM = 4) (
   (
     .clkIn(clkIn),
     .rstIn(rstIn),
-    .doneCntOut(cntDoneW),
+    .cntDoneOut(cntDoneW),
     .cntValOut()
   );
 
