@@ -1,31 +1,31 @@
 module clk_divider #(parameter DIV_NUM = 4) (
-  input i_clk,
-  input i_rst,
-  output o_clk
+  input clkIn,
+  input rstIn,
+  output clkOut
 );
 
-  reg r_clk;
+  reg clkR;
 
-  wire w_cnt_done;
+  wire cntDoneW;
 
-  assign o_clk = r_clk;
+  assign clkOut = clkR;
 
   counter #(.MAX_CNT(DIV_NUM), .LOOP(1)) cnt_div
   (
-    .i_clk(i_clk),
-    .i_rst(i_rst),
-    .o_cnt_done(w_cnt_done),
-    .o_cnt_val()
+    .clkIn(clkIn),
+    .rstIn(rstIn),
+    .doneCntOut(cntDoneW),
+    .cntValOut()
   );
 
-  always @ (posedge i_rst, posedge i_clk) begin
-    if (i_rst == 1) begin
-      r_clk      <= 0;
+  always @ (posedge rstIn, posedge clkIn) begin
+    if (rstIn == 1) begin
+      clkR      <= 0;
     end
 
-    else if (i_clk == 1) begin
-      if (w_cnt_done == 1) begin
-        r_clk <= ~r_clk;
+    else if (clkIn == 1) begin
+      if (cntDoneW == 1) begin
+        clkR <= ~clkR;
       end
     end
   end
