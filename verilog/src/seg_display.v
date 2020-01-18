@@ -40,7 +40,7 @@ module seg_display (
         default : segR <= 7'hFF;
       endcase
 
-      segOut     <= r_seg;
+      segOut     <= segR;
       decimalOut <= 1'b1;
     end
   end  
