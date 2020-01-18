@@ -1,4 +1,4 @@
-module segDisplay (
+module seg_display (
     input clkIn,
     input rstIn,
     input [4:0] digitIn,
