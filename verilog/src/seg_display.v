@@ -1,9 +1,9 @@
 module seg_display (
     input clkIn,
     input rstIn,
-    input [4:0] digitIn,
-    output reg [6:0] segOut,
-    output reg decimalOut
+    input [3:0] digitIn,
+    output [6:0] segOut,
+    output decimalOut
 );
 
   // A is the LSB and G is the MSB
@@ -21,6 +21,9 @@ module seg_display (
   reg [6:0] segR   = {7{1'b1}};
   reg [4:0] digitR = {4{1'b1}};
 
+  assign segOut     = segR;
+  assign decimalOut = 1;
+
   always @ (posedge rstIn, posedge clkIn) begin
     if (rstIn == 1) begin
       segR <= 7'hFF;
@@ -28,6 +31,7 @@ module seg_display (
 
     else if (clkIn == 1) begin
       case (digitIn)
+        0 : segR <= 7'h40;
         1 : segR <= 7'h79;
         2 : segR <= 7'h24;
         3 : segR <= 7'h30;
@@ -39,9 +43,6 @@ module seg_display (
         9 : segR <= 7'h10;
         default : segR <= 7'hFF;
       endcase
-
-      segOut     <= segR;
-      decimalOut <= 1'b1;
     end
   end  
 endmodule
