@@ -1,5 +1,5 @@
 module counter #(
-  parameter integer MAX_CNT = 2, 
+  parameter MAX_CNT = 2, 
   parameter LOOP = 1'b1,
   parameter IS_CNT_DOWN = 1'b0,
   localparam integer CNT_ARR_SIZE = IS_CNT_DOWN?$rtoi($floor($log10(MAX_CNT)/$log10(2)+1)):$rtoi($floor($log10(MAX_CNT)/$log10(2)))
@@ -32,20 +32,30 @@ module counter #(
         cntDoneR <= 0;
 
         if (IS_CNT_DOWN == 0) begin
-          cntValR <= cntValR + 1;
-
           if (cntValR == MAX_CNT) begin
             cntDoneR <= 1;
-            cntValR  <= 0;
+
+            if (LOOP == 1) begin
+              cntValR  <= 0;
+            end
+          end
+
+          else begin
+            cntValR <= cntValR + 1;
           end
         end
 
         else begin
-          cntValR <= cntValR - 1;
-
           if (cntValR[CNT_ARR_SIZE] == 1) begin
             cntDoneR <= 1;
-            cntValR  <= MAX_CNT;
+
+            if (LOOP == 1) begin
+              cntValR  <= MAX_CNT;
+            end
+          end
+
+          else begin
+            cntValR <= cntValR - 1;
           end
         end
       end
