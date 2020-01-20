@@ -9,6 +9,8 @@ module button_debounce #(parameter DEBOUNCE_CNT = 0) (
   wire ff1ToFf2W;
   wire ff2ToCntrW;
   wire ffEnOutW;
+
+  // If the output of the 2 flip-flops don't match, that means switch bounce has occurred, so the counter will be reset.
   wire debounceRstW = (ff1ToFf2W ^ ff2ToCntrW) | rstIn;
 
   // Input button press is passed through consecutive flip-flops (ff1, ff2, and ff_out).
