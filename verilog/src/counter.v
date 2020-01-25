@@ -22,9 +22,9 @@ module counter #(
 
   always @ (posedge rstIn, posedge clkIn) begin
     if (rstIn == 1) begin
-      cntValR  <= 0;
+      cntValR  <= IS_CNT_DOWN?0:MAX_CNT-1;
       cntDoneR <= 0;
-      enR       <= 0;
+      enR      <= 0;
     end
 
     else if (clkIn == 1) begin
@@ -36,7 +36,7 @@ module counter #(
             cntDoneR <= 1;
 
             if (LOOP == 1) begin
-              cntValR  <= 0;
+              cntValR  <= 1;
             end
           end
 
@@ -50,7 +50,7 @@ module counter #(
             cntDoneR <= 1;
 
             if (LOOP == 1) begin
-              cntValR  <= MAX_CNT;
+              cntValR  <= MAX_CNT-2;
             end
           end
 
