@@ -41,6 +41,13 @@ module seg_display (
         7 : segR <= 7'h78;
         8 : segR <= 7'h00;
         9 : segR <= 7'h10;
+        A : segR <= 7'h08;
+        B : segR <= 7'h03;
+        C : segR <= 7'h46;
+        D : segR <= 7'h21;
+        E : segR <= 7'h06;
+        F : segR <= 7'h0E;
+
         default : segR <= 7'hFF;
       endcase
     end
