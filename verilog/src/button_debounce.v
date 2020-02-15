@@ -1,5 +1,5 @@
 // This module is a button debounce module made of 3 flip-flops and 1 counter.
-module button_debounce #(parameter DEBOUNCE_CNT = 0) (
+module button_debounce #(parameter DEBOUNCE_CNT = 20'hF_FFFF) (
   input clkIn,
   input rstIn,
   input buttonIn,
