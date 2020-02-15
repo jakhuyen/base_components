@@ -13,14 +13,14 @@ module reset_sync #(parameter RST_IN_POLARITY = 1'b0, parameter RST_OUT_POLARITY
 
   wire ff1OutR;
 
-  FF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(1), .qOut(ff1OutR));
+  DFF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(1), .qOut(ff1OutR));
 
   if (RST_OUT_POLARITY == 1) begin
-    FF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(ff1OutR), .qNotOut(rstOut));
+    DFF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(ff1OutR), .qNotOut(rstOut));
   end
 
   else if (RST_OUT_POLARITY == 0) begin
-    FF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(ff1OutR), .qOut(rstOut));
+    DFF #(.RST_POLARITY(RST_IN_POLARITY)) syncFF1 (.clkIn(clkIn), .rstIn(rstIn), .enIn(1), .dIn(ff1OutR), .qOut(rstOut));
   end
 
 endmodule
