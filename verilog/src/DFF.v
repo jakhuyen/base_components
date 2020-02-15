@@ -9,7 +9,7 @@ module DFF #(parameter RST_POLARITY = 1'b1) (
 );
 
   always @(posedge rstIn, posedge clkIn) begin
-    if (rstIn == IS_RST_LOW) begin
+    if (rstIn == RST_POLARITY) begin
       qOut    <= 0;
       qNotOut <= 1;
     end
