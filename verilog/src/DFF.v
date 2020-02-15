@@ -1,5 +1,5 @@
 // Module for a D Flip-FLop with an enable control pin
-module DFF (
+module DFF #(parameter RST_POLARITY = 1'b1) (
   input clkIn,
   input rstIn,
   input enIn,
@@ -9,7 +9,7 @@ module DFF (
 );
 
   always @(posedge rstIn, posedge clkIn) begin
-    if (rstIn == 1) begin
+    if (rstIn == IS_RST_LOW) begin
       qOut    <= 0;
       qNotOut <= 1;
     end
