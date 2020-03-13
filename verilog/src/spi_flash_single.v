@@ -118,9 +118,13 @@ module spi_flash_single #(
           begin
             // Detect rising edge
             if (prevClkStateR == 0 && sclkMainW == 1) begin
-              // If sampling data on rising edge
-              if (CPHA == 0) begin
-                if (rxBitCntR != DATA_WIDTH && misoIn != 1'bZ) begin
+              // CPOL = 0, CPHA = 0 (Sample Data)
+              // CPOL = 0, CPHA = 1 (Change Data)
+              // CPOL = 1, CPHA = 0 (Change Data)
+              // CPOL = 1, CPHA = 1 (Sample Data)
+              // Mode 0
+              if ((CPOL = 0 && CPHA == 0) || (CPOL = 1 && CPHA == 1)) begin
+                if (rxBitCntR != DATA_WIDTH) begin
                   rxBitCntR <= rxBitCntR + 1;
                   rxDataR   <= {rxDataR[DATA_WIDTH-1:1], misoIn};
                 end
@@ -136,7 +140,7 @@ module spi_flash_single #(
                   end
               end
 
-              // If shifting data on rising edge
+              // If data changes on trailing edge
               else if (CPHA == 1) begin
                 if 
                 end
@@ -146,6 +150,10 @@ module spi_flash_single #(
 
             // Detect falling edge
             else if (prevClkStateR == 1 && sclkMainW == 0)
+              // CPOL = 0, CPHA = 0 (Change Data)
+              // CPOL = 0, CPHA = 1 (Sample Data)
+              // CPOL = 1, CPHA = 0 (Sample Data)
+              // CPOL = 1, CPHA = 1 (Change Data)
               // If sampling data on falling edge
               if (CPHA == 1 && misoIn != 1'bZ) begin
 
@@ -167,22 +175,21 @@ module spi_flash_single #(
 
       prevClkStateR <= (CPHA == 0)?
 
-  
+      // 
 
 endmodule
 
-// The TX 
 // Whenever enIn is asserted, txDataIn will be captured in a FIFO.
 
 // Whenever rxRdyOut is asserted, data can be pulled out of rxDataOut
 
 // CPOL = 0 (Clock Idle State is low)
 // CPOL = 1 (Clock Idle State is high)
-// CPHA = 0 (Data sample on rising edge, data shifted on falling edge)
-// CPHA = 1 (Data sample on falling edge, data shifted on rising edge)
+// CPHA = 0 (Data sampled on leading edge, data changes on the trailing edge)
+// CPHA = 1 (Data changes on the leading edge, data sampled on trailing edge)
 
+// CPHA = 0, MOSI data must be available before first clock edge
+// CPHA = 1, MISO data must be held valid until CS is deasserted. I don't have to do anything since the slave takes care of this.
 // For CPOL = 0 and CPHA = 0
 // MOSI shifts out on falling edge
 // MISO samples on rising edge
-
-// 25.6 to 51.2 clock frequency external

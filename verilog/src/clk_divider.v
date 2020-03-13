@@ -1,6 +1,7 @@
 module clk_divider #(parameter DIV_NUM = 4) (
   input clkIn,
   input rstIn,
+  input enIn,
   output clkOut
 );
 
@@ -14,7 +15,7 @@ module clk_divider #(parameter DIV_NUM = 4) (
   (
     .clkIn(clkIn),
     .rstIn(rstIn),
-    .enIn(1'b1),
+    .enIn(enIn),
     .cntDoneOut(cntDoneW),
     .cntValOut()
   );
